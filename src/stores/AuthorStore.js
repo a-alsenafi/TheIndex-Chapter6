@@ -1,5 +1,7 @@
 import { decorate, observable, computed } from "mobx";
 import axios from "axios";
+import bookStore from "./stores/bookStore";
+import { observer } from "mobx-react";
 
 const instance = axios.create({
   baseURL: "https://the-index-api.herokuapp.com"
@@ -46,4 +48,4 @@ decorate(AuthorStore, {
 const authorStore = new AuthorStore();
 authorStore.fetchAuthors();
 
-export default authorStore;
+export default observer(authorStore);

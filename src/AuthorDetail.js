@@ -1,9 +1,12 @@
 import React, { Component } from "react";
+import { observer } from "mobx-react";
 import axios from "axios";
 
 // Components
 import BookTable from "./BookTable";
 import Loading from "./Loading";
+import bookStore from "./stores/bookStore";
+import authorStore from "./stores/AuthorStore";
 
 const instance = axios.create({
   baseURL: "https://the-index-api.herokuapp.com"
@@ -39,6 +42,7 @@ class AuthorDetail extends Component {
   }
 
   render() {
+    let authorsBooks = bookStore.books.filter(book => book.authors);
     if (this.state.loading) {
       return <Loading />;
     } else {
@@ -60,4 +64,4 @@ class AuthorDetail extends Component {
   }
 }
 
-export default AuthorDetail;
+export default observer(AuthorDetail);
